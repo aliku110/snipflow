@@ -19,11 +19,18 @@
 
 ## 技术栈
 
-- **后端:** Node.js + Express + better-sqlite3
+- **后端:** Node.js + Express + sql.js (WASM SQLite, 零编译)
 - **前端:** 原生 SPA (HTML + CSS + JS)
 - **高亮:** highlight.js
 - **支付:** Stripe (预留，无 key 时 Demo 模式)
-- **部署:** 单服务器，零依赖运行
+- **部署:** Railway / Docker / 直接运行
+
+## 一键部署
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new?template=https://github.com/aliku110/snipflow)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/aliku110/snipflow)
+
+> 点击上方按钮，授权 GitHub，Railway/Render 自动部署。无需手动配置服务器。
 
 ## 快速启动
 
@@ -71,6 +78,16 @@ docker build -t snipflow .
 docker run -d -p 3000:3000 -v snipflow-data:/app/data snipflow
 ```
 
+### Railway 部署（推荐）
+
+1. 点击上方 **Deploy on Railway** 按钮
+2. 用 GitHub 登录 Railway
+3. 选择仓库 `aliku110/snipflow`
+4. Railway 自动部署，分配 `*.railway.app` 域名
+5. 在 Railway Dashboard 设置环境变量 `JWT_SECRET`
+
+支持自动 HTTPS、自动扩缩容、免费额度。
+
 ## API 文档
 
 | 方法 | 路径 | 说明 | 认证 |
@@ -101,6 +118,16 @@ docker run -d -p 3000:3000 -v snipflow-data:/app/data snipflow
 | 🚀 启动 | 1000 用户 | 免费 + 口碑传播，开发者社区推广 |
 | 📈 增长 | 10000 用户 | 付费转化率 5%，月收入 ¥9,500 |
 | 💰 规模 | 50000+ 用户 | Pro ¥19/月 + 团队版 ¥49/月 + API 按量计费 |
+
+### 环境变量（必填）
+
+| 变量 | 说明 | 默认值 |
+|------|------|--------|
+| `PORT` | 服务端口 | `3000` |
+| `JWT_SECRET` | JWT 签名密钥（生产环境**必须修改**） | `snipflow-dev-secret` |
+| `DB_PATH` | SQLite 数据库路径 | `./data/snipflow.db` |
+| `STRIPE_SECRET_KEY` | Stripe Secret Key（可选） | - |
+| `STRIPE_PRICE_PRO_MONTHLY` | Stripe Price ID（可选） | - |
 
 ## 许可
 
