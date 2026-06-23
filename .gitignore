@@ -1,0 +1,6 @@
+# SnipFlow - Git ignore
+node_modules/
+data/*.db
+.env
+tunnel.log
+*.log

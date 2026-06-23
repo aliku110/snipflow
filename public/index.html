@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SnipFlow - 云端代码片段管理平台 | 保存 · 组织 · 分享</title>
+  <meta name="description" content="SnipFlow - 面向开发者的云端代码片段管理平台。支持 30+ 编程语言语法高亮、标签分类、一键分享。免费版可用，Pro 版仅 ¥19/月。">
+  <meta name="keywords" content="代码片段,代码管理,开发者工具,SaaS,snippet manager,code snippets">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="SnipFlow - 云端代码片段管理平台">
+  <meta property="og:description" content="保存、组织、分享你的代码。开发者必备的云端代码片段管理器。">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://snipflow.loca.lt">
+  <meta property="og:image" content="https://snipflow.loca.lt/assets/og-image.png">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SnipFlow - 云端代码片段管理平台">
+  <meta name="twitter:description" content="让代码更有价值 — 保存、组织、分享你的代码片段。">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="//cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/atom-one-dark.min.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+  <div id="app">
+    <!-- 导航栏 -->
+    <nav class="navbar" id="navbar">
+      <div class="container">
+        <div class="nav-brand" onclick="navigateTo('')">
+          <span class="nav-logo">⚡</span>
+          <span class="nav-title">SnipFlow</span>
+        </div>
+        <div class="nav-links" id="navLinks">
+          <a href="#" onclick="navigateTo('')">发现</a>
+          <a href="#" onclick="navigateTo('explore')" class="nav-explore-link">探索</a>
+          <a href="#" onclick="navigateTo('pricing')" class="nav-pricing-link">定价</a>
+          <span id="authNavLinks" style="display:none;">
+            <a href="#" onclick="navigateTo('dashboard')">我的片段</a>
+          </span>
+        </div>
+        <div class="nav-actions">
+          <span id="authNav" style="display:none;">
+            <a href="#" onclick="navigateTo('dashboard')" class="btn btn-sm btn-outline">控制台</a>
+            <button class="btn btn-sm btn-secondary" onclick="logout()" style="font-size:.82rem;padding:5px 12px;">退出</button>
+          </span>
+          <span id="guestNav">
+            <a href="#" onclick="navigateTo('login')" class="btn btn-sm btn-outline">登录</a>
+            <a href="#" onclick="navigateTo('register')" class="btn btn-sm btn-primary">注册</a>
+          </span>
+        </div>
+        <button class="nav-toggle" onclick="toggleMobileMenu()">☰</button>
+      </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <main class="main-content" id="mainContent">
+      <!-- 由 JS 动态渲染 -->
+    </main>
+
+    <!-- 底部 -->
+    <footer class="footer">
+      <div class="container">
+        <p>SnipFlow &copy; 2026 — 让代码片段更有价值</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 通知 -->
+  <div id="toast" class="toast"></div>
+
+  <!-- 编辑器弹窗 -->
+  <div id="editorModal" class="modal" style="display:none;">
+    <div class="modal-backdrop" onclick="closeEditor()"></div>
+    <div class="modal-content modal-lg">
+      <div class="modal-header">
+        <h3 id="editorTitle">新建代码片段</h3>
+        <button class="modal-close" onclick="closeEditor()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <input type="text" id="snippetTitle" placeholder="片段标题（可选）" class="form-input">
+        </div>
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <select id="snippetLanguage" class="form-input"></select>
+          </div>
+          <div class="form-group flex-1">
+            <input type="text" id="snippetTags" placeholder="标签，逗号分隔" class="form-input">
+          </div>
+          <div class="form-group">
+            <select id="snippetVisibility" class="form-input">
+              <option value="private">🔒 私密</option>
+              <option value="unlisted">🔗 仅链接可见</option>
+              <option value="public">🌍 公开</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea id="snippetCode" placeholder="在此粘贴你的代码…" class="form-textarea code-editor" rows="15" spellcheck="false"></textarea>
+        </div>
+        <div class="form-group">
+          <input type="text" id="snippetDescription" placeholder="简要描述（可选）" class="form-input">
+        </div>
+        <div class="form-actions">
+          <button class="btn btn-secondary" onclick="closeEditor()">取消</button>
+          <button class="btn btn-primary" onclick="saveSnippet()" id="saveBtn">保存</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/snippets.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
