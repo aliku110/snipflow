@@ -1,6 +1,43 @@
 # SnipFlow - Git ignore
+
+# Dependencies
 node_modules/
-data/*.db
+
+# Environment & Secrets
 .env
-tunnel.log
+.env.local
+.env.production
+*.pem
+*.key
+
+# Database (persistent local state)
+data/
+*.db
+*.db-wal
+*.db-shm
+
+# Logs
 *.log
+tunnel.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Runtime
+pid
+*.pid
+*.seed
+
+# Production
+dist/
+build/
